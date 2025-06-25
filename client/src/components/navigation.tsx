@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { SignInButton, SignUpButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, useUser } from "@clerk/clerk-react";
 import { useLocation } from "wouter";
 
 export default function Navigation() {

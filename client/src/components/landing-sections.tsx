@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { SignUpButton } from "@clerk/nextjs";
+import { SignUpButton } from "@clerk/clerk-react";
 import { 
   Lightbulb, 
   Code, 

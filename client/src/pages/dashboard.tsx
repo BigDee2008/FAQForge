@@ -1,4 +1,4 @@
-import { useUser, UserButton } from "@clerk/nextjs";
+import { useUser, UserButton } from "@clerk/clerk-react";
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
