@@ -1,8 +1,9 @@
+import { useUser, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
-import { SignInButton, SignUpButton, useUser } from "@clerk/clerk-react";
 import { useLocation } from "wouter";
+import { memo } from "react";
 
-export default function Navigation() {
+function Navigation() {
   const { user } = useUser();
   const [, setLocation] = useLocation();
   
@@ -64,3 +65,5 @@ export default function Navigation() {
     </nav>
   );
 }
+
+export default memo(Navigation);

@@ -114,7 +114,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Apply Clerk user ID extraction middleware
+  // Apply Clerk user ID extraction middleware before routes
   app.use(extractClerkUserId);
 
   const httpServer = createServer(app);

@@ -113,6 +113,16 @@ The application follows a modern full-stack architecture with clear separation b
 
 ## Recent Changes
 
+- June 25, 2025: Authentication and performance optimizations
+  - Fixed Clerk authentication issues with updated props (forceRedirectUrl)
+  - Implemented daily usage limits (3 FAQ generations per 24 hours)
+  - Optimized routing performance with React.memo and useCallback
+  - Added loading spinners and improved user feedback
+  - Updated pricing section to show only free plan
+  - Simplified footer with Features and Pricing links only
+  - Updated copyright year to 2025
+  - Enhanced query client with better caching and retry logic
+
 - June 24, 2025: Major restructuring completed
   - Implemented Clerk authentication system
   - Created separate dashboard page for FAQ generation

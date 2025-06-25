@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -25,7 +25,7 @@ interface GeneratedFaq {
   cssCode: string;
 }
 
-export default function FaqGenerator() {
+function FaqGenerator() {
   const [generatedFaq, setGeneratedFaq] = useState<GeneratedFaq | null>(null);
   const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(new Set());
   const [usageInfo, setUsageInfo] = useState<{ count: number; limit: number; remaining: number } | null>(null);
@@ -75,9 +75,9 @@ export default function FaqGenerator() {
     },
   });
 
-  const onSubmit = (data: GenerateFaqRequest) => {
+  const onSubmit = useCallback((data: GenerateFaqRequest) => {
     generateFaqMutation.mutate(data);
-  };
+  }, [generateFaqMutation]);
 
   const toggleQuestion = (index: number) => {
     const newExpanded = new Set(expandedQuestions);
@@ -371,3 +371,5 @@ export default function FaqGenerator() {
     </div>
   );
 }
+
+export default memo(FaqGenerator);

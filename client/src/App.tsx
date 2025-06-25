@@ -32,8 +32,6 @@ function App() {
   return (
     <ClerkProvider 
       publishableKey={publishableKey}
-      afterSignInUrl="/dashboard"
-      afterSignUpUrl="/dashboard"
     >
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
