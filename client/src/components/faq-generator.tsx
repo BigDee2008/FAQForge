@@ -28,6 +28,7 @@ interface GeneratedFaq {
 export default function FaqGenerator() {
   const [generatedFaq, setGeneratedFaq] = useState<GeneratedFaq | null>(null);
   const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(new Set());
+  const [usageInfo, setUsageInfo] = useState<{ count: number; limit: number; remaining: number } | null>(null);
   const { toast } = useToast();
 
   const form = useForm<GenerateFaqRequest>({
@@ -43,21 +44,32 @@ export default function FaqGenerator() {
   const generateFaqMutation = useMutation({
     mutationFn: async (data: GenerateFaqRequest) => {
       const response = await apiRequest("POST", "/api/generate-faq", data);
-      return response.json() as Promise<GeneratedFaq>;
+      return response.json();
     },
     onSuccess: (data) => {
       setGeneratedFaq(data);
       setExpandedQuestions(new Set([0]));
+      if (data.usage) {
+        setUsageInfo(data.usage);
+      }
       toast({
         title: "FAQ Generated Successfully!",
-        description: "Your FAQ section is ready. You can now copy the code.",
+        description: `Your FAQ section is ready. ${data.usage ? `${data.usage.remaining} generations remaining today.` : ''}`,
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("FAQ generation error:", error);
+      let message = "Failed to generate FAQ. Please try again.";
+      
+      if (error?.message?.includes("Daily limit reached")) {
+        message = "You've reached your daily limit of 3 FAQ generations. Your limit resets at midnight.";
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+      
       toast({
         title: "Generation Failed",
-        description: error instanceof Error ? error.message : "Failed to generate FAQ. Please try again.",
+        description: message,
         variant: "destructive",
       });
     },
@@ -104,6 +116,28 @@ export default function FaqGenerator() {
 
   return (
     <div className="p-8">
+      {usageInfo && (
+        <div className="mb-6 p-4 bg-muted rounded-lg">
+          <div className="flex items-center justify-between">
+            <div>
+              <h4 className="font-medium text-foreground">Daily Usage</h4>
+              <p className="text-sm text-muted-foreground">
+                {usageInfo.count} of {usageInfo.limit} generations used today
+              </p>
+            </div>
+            <div className="text-right">
+              <div className="text-2xl font-bold text-primary">{usageInfo.remaining}</div>
+              <div className="text-xs text-muted-foreground">remaining</div>
+            </div>
+          </div>
+          <div className="mt-2 w-full bg-gray-700 rounded-full h-2">
+            <div 
+              className="bg-gradient-to-r from-primary to-secondary h-2 rounded-full transition-all duration-300"
+              style={{ width: `${(usageInfo.count / usageInfo.limit) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+      )}
       <Card className="shadow-xl overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-0">
           <div className="p-8 border-r border-border">

@@ -8,6 +8,7 @@ export interface IStorage {
     cssCode: string;
   }): Promise<Faq>;
   getFaq(id: number): Promise<Faq | undefined>;
+  getUserFaqsToday(userId: string): Promise<number>;
   
   // User methods (legacy)
   getUser(id: number): Promise<User | undefined>;
@@ -46,6 +47,21 @@ export class MemStorage implements IStorage {
 
   async getFaq(id: number): Promise<Faq | undefined> {
     return this.faqs.get(id);
+  }
+
+  async getUserFaqsToday(userId: string): Promise<number> {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    let count = 0;
+    for (const faq of this.faqs.values()) {
+      if (faq.userId === userId && faq.createdAt >= today && faq.createdAt < tomorrow) {
+        count++;
+      }
+    }
+    return count;
   }
 
   // User methods (legacy)

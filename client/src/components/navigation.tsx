@@ -43,16 +43,19 @@ export default function Navigation() {
               </Button>
             ) : (
               <div className="flex items-center space-x-4">
-                <SignInButton mode="modal">
-                  <Button variant="ghost" className="text-gray-300 hover:text-white">
-                    Sign In
-                  </Button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <Button className="bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90">
-                    Get Started
-                  </Button>
-                </SignUpButton>
+                <Button 
+                  variant="ghost" 
+                  className="text-gray-300 hover:text-white"
+                  onClick={() => setLocation('/sign-in')}
+                >
+                  Sign In
+                </Button>
+                <Button 
+                  className="bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90"
+                  onClick={() => setLocation('/sign-up')}
+                >
+                  Get Started
+                </Button>
               </div>
             )}
           </div>

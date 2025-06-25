@@ -31,14 +31,13 @@ export function HeroSection() {
           Create comprehensive FAQ sections for your website in seconds. Our AI understands your business and generates relevant questions with detailed answers, plus clean HTML code ready to copy.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <SignUpButton mode="modal">
-            <Button 
-              size="lg"
-              className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 text-lg font-semibold hover:opacity-90 shadow-lg"
-            >
-              Start Generating FAQs
-            </Button>
-          </SignUpButton>
+          <Button 
+            size="lg"
+            className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 text-lg font-semibold hover:opacity-90 shadow-lg"
+            onClick={() => window.location.href = '/sign-up'}
+          >
+            Start Generating FAQs
+          </Button>
           <Button 
             variant="outline" 
             size="lg"
@@ -150,50 +149,6 @@ export function FeaturesSection() {
 }
 
 export function PricingSection() {
-  const plans = [
-    {
-      name: "Starter",
-      price: "Free",
-      period: "/forever",
-      features: [
-        "5 FAQ generations per month",
-        "Basic HTML output",
-        "Email support"
-      ],
-      buttonText: "Get Started",
-      buttonVariant: "outline" as const,
-      popular: false
-    },
-    {
-      name: "Pro",
-      price: "$19",
-      period: "/month",
-      features: [
-        "Unlimited FAQ generations",
-        "Advanced HTML + CSS",
-        "Multiple FAQ styles",
-        "Priority support"
-      ],
-      buttonText: "Start Pro Trial",
-      buttonVariant: "default" as const,
-      popular: true
-    },
-    {
-      name: "Enterprise",
-      price: "$99", 
-      period: "/month",
-      features: [
-        "Everything in Pro",
-        "API access",
-        "White-label option",
-        "Dedicated support"
-      ],
-      buttonText: "Contact Sales",
-      buttonVariant: "outline" as const,
-      popular: false
-    }
-  ];
-
   return (
     <section id="pricing" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -202,54 +157,50 @@ export function PricingSection() {
             Simple, Transparent Pricing
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Choose the plan that fits your needs. All plans include unlimited FAQ generations and code exports.
+            Start for free and generate professional FAQ sections for your business.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {plans.map((plan, index) => (
-            <Card 
-              key={index} 
-              className={`relative bg-gray-900 border-gray-700 ${plan.popular ? 'border-primary scale-105 shadow-xl bg-gradient-to-br from-primary/20 to-secondary/20' : 'hover:border-primary transition-colors'}`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-1 rounded-full text-sm font-semibold">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-              <CardContent className="p-8">
-                <h3 className="text-xl font-semibold text-white mb-2">{plan.name}</h3>
-                <div className="text-3xl font-bold mb-6 text-white">
-                  {plan.price}
-                  <span className="text-base font-normal text-gray-300">
-                    {plan.period}
-                  </span>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center">
-                      <Check className="w-5 h-5 mr-3 text-accent" />
-                      <span className="text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  variant={plan.popular ? "default" : plan.buttonVariant}
-                  className={`w-full py-3 px-6 font-semibold ${
-                    plan.popular 
-                      ? 'bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90' 
-                      : plan.buttonVariant === 'outline' 
-                        ? 'border-gray-600 text-gray-300 hover:bg-gray-800' 
-                        : ''
-                  }`}
-                >
-                  {plan.buttonText}
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="flex justify-center">
+          <Card className="relative bg-gray-900 border-gray-700 max-w-md w-full">
+            <CardContent className="p-8 text-center">
+              <h3 className="text-2xl font-semibold text-white mb-2">Free Plan</h3>
+              <div className="text-4xl font-bold mb-6 text-white">
+                $0
+                <span className="text-base font-normal text-gray-300">
+                  /forever
+                </span>
+              </div>
+              <ul className="space-y-3 mb-8 text-left">
+                <li className="flex items-center">
+                  <Check className="w-5 h-5 mr-3 text-accent" />
+                  <span className="text-gray-300">3 FAQ generations per day</span>
+                </li>
+                <li className="flex items-center">
+                  <Check className="w-5 h-5 mr-3 text-accent" />
+                  <span className="text-gray-300">Professional HTML + CSS output</span>
+                </li>
+                <li className="flex items-center">
+                  <Check className="w-5 h-5 mr-3 text-accent" />
+                  <span className="text-gray-300">Multiple FAQ styles</span>
+                </li>
+                <li className="flex items-center">
+                  <Check className="w-5 h-5 mr-3 text-accent" />
+                  <span className="text-gray-300">Copy-to-clipboard functionality</span>
+                </li>
+                <li className="flex items-center">
+                  <Check className="w-5 h-5 mr-3 text-accent" />
+                  <span className="text-gray-300">Mobile responsive design</span>
+                </li>
+              </ul>
+              <Button 
+                className="w-full py-3 px-6 font-semibold bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90"
+                onClick={() => window.location.href = '/sign-up'}
+              >
+                Get Started Free
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
@@ -257,16 +208,15 @@ export function PricingSection() {
 }
 
 export function Footer() {
-  const footerLinks = {
-    Product: ["Features", "Pricing", "API", "Integrations"],
-    Support: ["Documentation", "Help Center", "Contact", "Status"],
-    Company: ["About", "Blog", "Careers", "Privacy"]
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <footer className="bg-black text-white py-16 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
@@ -290,23 +240,31 @@ export function Footer() {
               </a>
             </div>
           </div>
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="text-lg font-semibold mb-4">{category}</h3>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-gray-400 hover:text-primary transition-colors">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              <li>
+                <button 
+                  onClick={() => scrollToSection('features')}
+                  className="text-gray-400 hover:text-primary transition-colors"
+                >
+                  Features
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('pricing')}
+                  className="text-gray-400 hover:text-primary transition-colors"
+                >
+                  Pricing
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div></div>
         </div>
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 FAQforge. All rights reserved.</p>
+          <p>&copy; 2025 FAQforge. All rights reserved.</p>
         </div>
       </div>
     </footer>

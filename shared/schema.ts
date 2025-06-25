@@ -4,6 +4,7 @@ import { z } from "zod";
 
 export const faqs = pgTable("faqs", {
   id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(),
   businessType: text("business_type").notNull(),
   businessDescription: text("business_description").notNull(),
   websiteUrl: text("website_url"),
@@ -18,6 +19,7 @@ export const faqs = pgTable("faqs", {
 });
 
 export const insertFaqSchema = createInsertSchema(faqs).pick({
+  userId: true,
   businessType: true,
   businessDescription: true,
   websiteUrl: true,
